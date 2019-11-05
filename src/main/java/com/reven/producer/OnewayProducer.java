@@ -1,14 +1,14 @@
-package com.reven.mq;
+package com.reven.producer;
 
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
 /**
- * @ClassName:  OnewayProducer   
- * @Description: requiring moderate reliability, such as log collection.
+ * 适度的可靠性，如日志收集
+ * 
  * @author reven
- * @date   2019年10月9日
+ * @date 2019年10月9日
  */
 public class OnewayProducer {
     public static void main(String[] args) throws Exception {
@@ -24,6 +24,11 @@ public class OnewayProducer {
                     ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
             );
             // Call send message to deliver message to one of brokers.
+            /**
+             * 1、只投递消息一次 <br/>
+             * 2、内部一些异常，不重试 <br/>
+             * 3、未知异常或broker离线等异常需要developer处理
+             */
             producer.sendOneway(msg);
 
         }
