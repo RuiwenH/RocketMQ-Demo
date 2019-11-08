@@ -1,0 +1,22 @@
+ 
+# 数据库配置
+deploy.datasource:
+  ip: localhost
+  dbname: test
+  username: root
+  password: 123456
+     
+spring.datasource:
+  url: jdbc:mysql://${deploy.datasource.ip}:3306/${deploy.datasource.dbname}?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+  username: ${deploy.datasource.username}
+  password: ${deploy.datasource.password}
+  type: com.alibaba.druid.pool.DruidDataSource
+
+# 公共配置与profiles选择无关
+mybatis:
+# mybatis日志打印设置
+  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapperLocations: classpath:mapper/*Mapper.xml,classpath*:sqlmap/*Mapper.xml
+
+spring.application:
+    name: "@project.name@" #从pom.xml中获取
