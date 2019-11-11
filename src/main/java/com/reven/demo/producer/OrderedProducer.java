@@ -1,4 +1,4 @@
-package com.reven.producer;
+package com.reven.demo.producer;
 
 import java.util.List;
 

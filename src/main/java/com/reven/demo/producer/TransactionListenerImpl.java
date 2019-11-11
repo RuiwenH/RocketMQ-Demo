@@ -1,17 +1,12 @@
-package com.reven.producer;
+package com.reven.demo.producer;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.annotation.Resource;
 
 import org.apache.rocketmq.client.producer.LocalTransactionState;
 import org.apache.rocketmq.client.producer.TransactionListener;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
-
-import com.reven.entity.Demo;
-import com.reven.service.IDemoService;
 
 import lombok.extern.slf4j.Slf4j;
 

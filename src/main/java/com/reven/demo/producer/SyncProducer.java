@@ -1,4 +1,4 @@
-package com.reven.producer;
+package com.reven.demo.producer;
 
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;

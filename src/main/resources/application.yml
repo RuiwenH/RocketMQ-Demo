@@ -16,7 +16,8 @@ spring.datasource:
 mybatis:
 # mybatis日志打印设置
   configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapperLocations: classpath:mapper/*Mapper.xml,classpath*:sqlmap/*Mapper.xml
+  mapperLocations: classpath:mapper/*Mapper.xml
 
 spring.application:
     name: "@project.name@" #从pom.xml中获取
+    

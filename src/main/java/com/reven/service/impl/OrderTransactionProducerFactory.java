@@ -29,17 +29,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @Scope(value = "singleton") // 指定为单例模式
-public class DemoTransactionProducer {
+public class OrderTransactionProducerFactory{
 
     private TransactionMQProducer producer;
 
     @Resource
-    private DemoTransactionListenerImpl transactionListener;
+    private OrderTransactionListenerImpl transactionListener;
+    
+    private OrderTransactionProducerFactory() {
+        super();
+    }
 
     // 对象创建并赋值之后调用
     @PostConstruct
     public void init() throws MQClientException {
-        log.info("DemoTransactionProducer   @PostConstruct...");
+        log.info("OrderTransactionProducer   @PostConstruct...");
         ExecutorService executorService = new ThreadPoolExecutor(2, 5, 100, TimeUnit.SECONDS,
                 new ArrayBlockingQueue<Runnable>(2000), new ThreadFactory() {
                     @Override
@@ -55,15 +59,25 @@ public class DemoTransactionProducer {
         producer.setTransactionListener(transactionListener);
         producer.setNamesrvAddr("10.1.203.68:9876");
         producer.start();
-        log.info("DemoTransactionProducer   @PostConstruct end");
+        log.info("OrderTransactionProducer   @PostConstruct end");
     }
+    
+    
+
+    /**
+     * @return the producer
+     */
+    public TransactionMQProducer getProducer() {
+        return producer;
+    }
+
 
     // 容器移除对象之前
     @PreDestroy
     public void destroy() {
-        log.info("DemoTransactionProducer   @PreDestroy...");
+        log.info("OrderTransactionProducer   @PreDestroy...");
         producer.shutdown();
-        log.info("DemoTransactionProducer   @PreDestroy end");
+        log.info("OrderTransactionProducer   @PreDestroy end");
     }
 
 }
