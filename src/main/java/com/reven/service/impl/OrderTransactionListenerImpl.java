@@ -10,7 +10,6 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.springframework.stereotype.Component;
 
-import com.reven.core.ServiceException;
 import com.reven.entity.Order;
 import com.reven.service.IOrderService;
 
@@ -30,7 +29,8 @@ public class OrderTransactionListenerImpl implements TransactionListener {
         log.info("LocalTransaction start," + msg.getTransactionId() + "," + msg.toString());
         // 模拟下订单
         try {
-//          模拟本地应用宕机——发送消息，但本地事务未提交。——本地事务调用完成后，打个断点，就会看到MQ发起消息确认请求
+            //  模拟本地应用宕机本地事务未提交——发送消息，但本地事务未提交。
+            // ——本地事务调用过程中，打个断点，将应用关闭，启动应用后会看到MQ发起消息确认请求，最终事务消息回滚。
             Order order = (Order) arg; // 模拟打断点位置
 
             // 模拟本地事务失败

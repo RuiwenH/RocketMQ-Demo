@@ -32,7 +32,7 @@ public class OrderServiceImpl extends AbstractService<Order> implements IOrderSe
     private OrderTransactionProducerFactory orderTransactionProducerFactory;
 
     @Override
-    @Transactional(rollbackFor = Throwable.class)
+    @Transactional(rollbackFor = Throwable.class) //需要在这里添加事务
     public void saveWithMQ(Order order) throws UnsupportedEncodingException {
         
         // 订单消息的body，仅限参考，下游尽可能通过订单编号，反查订单微服务获取订单详情

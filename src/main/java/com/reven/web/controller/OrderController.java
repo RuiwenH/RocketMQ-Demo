@@ -47,21 +47,6 @@ public class OrderController extends BaseController {
         return ResResult.success();
     }
 
-    /**
-     * 模拟其他子系统消费事务消息
-     * 
-     * @return
-     */
-    @GetMapping("/consumerMsg")
-    public ResResult consumerMsg() {
-        try {
-            orderService.consumerMsg();
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return ResResult.fail(e.getMessage());
-        }
-        return ResResult.success();
-    }
 
     @GetMapping("/add2")
     public ResResult add2(Order order) {
